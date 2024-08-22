@@ -29,3 +29,14 @@ return x>0 and sqrt(x) > 100  or and 防止短路
 Instead of listing formal parameters for a function, you can write *args, which represents all of the arguments that get passed into the function. We can then call another function with these same arguments by passing these *args into this other function. 
 牛顿迭代法真难md
 curry
+
+sometimes lambda is truly better than def
+lambda y: lambda x: search(f(x)=y)
+newton method
+lambda 拆开更适合阅读
+
+every local frame has its parent frame which is often the global frame
+self-reference
+def print_all(x):
+    print(x)
+    return priny_all
