@@ -288,6 +288,20 @@ def report_progress(typed, source, user_id, upload):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    end = len(typed)
+    if not typed:
+        user_progress = 0.0
+        upload({'id':user_id, 'progress': user_progress})
+        return user_progress
+    for i in range(len(typed)):
+        if typed[i] != source[i]:
+            end = i
+            break
+    user_progress = end / len(source)
+    upload({'id': user_id, 'progress':user_progress})
+
+    return user_progress
+        
     # END PROBLEM 8
 
 
@@ -310,6 +324,15 @@ def time_per_word(words, timestamps_per_player):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    times= [] # create time for per word
+    for i in timestamps_per_player:
+        x = []
+        for j in range(len(i)):
+            if j !=0:
+                x.append(i[j] - i[j-1])
+        times.append(x)
+    return match(words, times)
+
     # END PROBLEM 9
 
 
@@ -332,6 +355,21 @@ def fastest_words(match):
     word_indices = range(len(get_all_words(match)))    # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
+    result =[[],]*len(get_all_times(match))
+    for i in word_indices:
+        min = 100000  # any large number for beginning
+        player = 100 # any large number for beginning
+        for j in player_indices:
+            if time(match, j, i) < min:
+                min = time(match, j, i)
+                player = j
+        result[player] = result[player]+[get_word(match, i)]
+    return result
+        
+                
+
+
+
     # END PROBLEM 10
 
 
@@ -380,7 +418,7 @@ def match_string(match):
     """A helper function that takes in a match data abstraction and returns a string representation of it"""
     return f"match({get_all_words(match)}, {get_all_times(match)})"
 
-enable_multiplayer = False  # Change to True when you're ready to race.
+enable_multiplayer = True  # Change to True when you're ready to race.
 
 ##########################
 # Command Line Interface #
