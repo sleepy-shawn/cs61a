@@ -14,7 +14,16 @@ def composite_identity(f, g):
     False
     """
     "*** YOUR CODE HERE ***"
+    compound= lambda u: lambda v: lambda x: u(v(x))
+    def if_inverse(x):
+        if compound(f)(g)(x) == compound(g)(f)(x):
+            return True
+        else:
+            return False
+    return if_inverse
+    
 
+        
 
 def sum_digits(y):
     """Return the sum of the digits of non-negative integer y."""
@@ -60,9 +69,17 @@ def count_cond(condition):
     8
     """
     "*** YOUR CODE HERE ***"
-
+    def count(n):
+        num, i = 0, 1
+        while i <= n:
+            if condition(n,i):
+                num += 1
+            i += 1 
+        return num
+    return count
 
 def multiple(a, b):
+
     """Return the smallest number n that is a multiple of both a and b.
 
     >>> multiple(3, 4)
@@ -71,6 +88,16 @@ def multiple(a, b):
     42
     """
     "*** YOUR CODE HERE ***"
+    if a > b:
+        i = b
+    else:
+        i = a
+    while i > 0:
+        if a % i == 0 and b % i == 0:
+            break
+        i -= 1
+    return a * b // i
+
 
 
 
@@ -101,4 +128,23 @@ def cycle(f1, f2, f3):
     19
     """
     "*** YOUR CODE HERE ***"
+    def g(n):
+        who = 1
+        h = lambda x: x
+        compound = lambda f : lambda h: lambda x: f(h(x))
+        while n > 0:
+            if who == 1:
+                h = compound(f1)(h)
+                who = 2
+            elif who == 2:
+                h = compound(f2)(h)
+                who = 3
+            else:
+                h = compound(f3)(h)
+                who = 1
+            n -= 1
+            
+        return h 
+    return g
+                
 

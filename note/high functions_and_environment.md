@@ -40,3 +40,13 @@ self-reference
 def print_all(x):
     print(x)
     return priny_all
+（）illustrates whether you call it
+
+functional abstraction
+chosing names for compositon and its readable
+![alt text](Snipaste_2024-08-23_10-55-19.png)
+![alt text](image.png)
+
+
+两个函数的互相返回 太搞了
+![alt text](image-1.png)
