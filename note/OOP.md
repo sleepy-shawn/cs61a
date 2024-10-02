@@ -379,3 +379,159 @@ fireant 太经典了
 
 >>> We've been developing this ant for a long time in secret. It's so dangerous  that we had to lock it in the super hidden CS61A underground vault, but we finally think it is ready to go out on the field 
 hhhh
+ctrl + z 撤销
+python formatted string
+feeling = 'Love'
+course = 'Cs61a"
+f'I{feeling}{course}'
+function can have its own attribute
+
+modular component not only separated but also try to be more independent
+a good way to solve it is to write a doc string
+if make nosense:
+
+``` python 
+def __repr__(self):
+    return'<' + self.name + '>'
+```
+sotred(iterable, key, reverse =False) returns a new functions 
+
+distinguish between remove and pop
+
+use slice
+
+lambda function review
+![alt text](image-24.png)
+
+return x in [s] if x in [t]
+
+sorted change the quadratic to the linear 
+Amazing!
+fast overlap
+
+下图的work(john)有点神奇
+ ![alt text](image-25.png)
+
+ using built-in function
+ min_abs = min(map(s, abs))
+ return [i for in range(len(s)) if abs(s[i]) == min_abs]
+ when using list comprehension it's fine to use filter 
+ first define a filter
+
+ aggregation function : max(s[i] + s [i+1] for i in range(len(s) - 1)) 
+ zip(s[1:], s[:-1])
+ what a amazing pair
+ genius john
+ any
+ map
+ filter
+ max
+ zip
+ min
+
+ ![alt text](image-26.png)
+ s[i] in s[:i] + s[i+1]
+ data example amazing class
+ all 
+ any
+ sum or len
+ use indices or without indices
+ all and min
+ s.count
+
+ merge
+
+ define a order function first with default key lambda x: x
+ ![alt text](image-27.png)
+
+``` python
+ def __init__(self, first, rest=empty):
+        assert rest is Link.empty or isinstance(rest, Link)
+        self.first = first
+        self.rest = rest
+
+    def __repr__(self):
+        if self.rest is not Link.empty:
+            rest_repr = ', ' + repr(self.rest)
+        else:
+            rest_repr = ''
+        return 'Link(' + repr(self.first) + rest_repr + ')'
+
+    def __str__(self):
+        string = '<'
+        while self.rest is not Link.empty:
+            string += str(self.first) + ' '
+            self = self.rest
+        return string + str(self.first) + '>'def __init__(self, first, rest=empty):
+        assert rest is Link.empty or isinstance(rest, Link)
+        self.first = first
+        self.rest = rest
+```
+
+
+mutable tree
+Tree(label, branches= [])
+t.is_leaf()
+
+
+prune_trees：
+1. list comprehension
+2. without return
+3. first remove trees and the continue pruning
+   
+delete:
+1. extend == list +
+2. append
+``` scheme
+(define (pow base exp) 
+    (cond ((= exp 0) 1)
+      ((even? exp)(square(pow base (/ exp 2))))
+      (else (* base (pow base (- exp 1))))))
+```
+cond( 条件 + 结果)
+(条件 + 结果)
+
+`  + ，
+和 
+'
+区别在是否可以保留一些
+
+EXCEPTION   
+![alt text](image-35.png)
+
+
+assertion
+use python -O file.py
+![alt text](image-36.png)
+
+Raise TypeError('Bad argument')
+
+![alt text](image-37.png)
+![alt text](image-38.png)
+
+![alt text](image-39.png)
+
+```python
+def invert(x):
+    print('Never print zero')
+    return (1/x)
+
+def invert_safe(x):
+    try:
+        return invert(x)
+    except ZeroDivisionError as e:
+        print('handled', type(e))
+        return 0
+```
+
+reduce function
+for x in s：
+    initial = f(initial, x)
+return initial
+
+or 递归 列表递进的写法
+
+
+md let后要加括号即使重复也要加
+
+

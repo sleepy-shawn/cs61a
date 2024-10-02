@@ -48,11 +48,46 @@ class VendingMachine:
     'Here is your soda.'
     """
     "*** YOUR CODE HERE ***"
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+        self.store = 0
+        self.balance = 0
+
+    def vend(self):
+        if self.store == 0 and self.balance == 0:
+            return 'Nothing left to vend. Please restock.'
+        elif self.balance < self.price:
+            funds = self.price - self.balance
+            return f'Please add ${funds} more funds.'
+        elif self.balance == self.price:
+            self.balance = 0
+            self.store -= 1
+            return f'Here is your {self.name}.'
+        else:
+            left = self.balance - self.price
+            self.balance = 0
+            self.store -= 1
+            return f'Here is your {self.name} and ${left} change.'
+        
+    def restock(self, number):
+        self.store += number
+        return f'Current {self.name} stock: {self.store}'
+
+    def add_funds(self, amount):
+        if self.store > 0:
+            self.balance += amount
+            return f'Current balance: ${self.balance}'
+        else:
+            return f'Nothing left to vend. Please restock. Here is your ${amount}.'
+
+    
+
 
 
 def store_digits(n):
     """Stores the digits of a positive number n in a linked list.
-
+    
     >>> s = store_digits(1)
     >>> s
     Link(1)
@@ -68,7 +103,18 @@ def store_digits(n):
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     """
     "*** YOUR CODE HERE ***"
-
+    if n < 10:
+        return Link(n)
+    copy = n
+    count = 0
+    while n >= 10:
+        n = n // 10
+        count += 1
+    rest = copy - 10**count * n
+    print('debug', rest)
+    return Link(n, store_digits(rest))
+        
+    
 
 def deep_map_mut(func, lnk):
     """Mutates a deep link lnk by replacing each item found with the
@@ -90,7 +136,16 @@ def deep_map_mut(func, lnk):
     <9 <16> 25 36>
     """
     "*** YOUR CODE HERE ***"
+    if lnk is Link.empty:
+        return lnk
+    else:
+        if isinstance(lnk.first, Link):
+            lnk.first.first = func(lnk.first.first)
+        else:
+            lnk.first = func(lnk.first)
+        deep_map_mut(func, lnk.rest)
 
+        
 
 def two_list(vals, counts):
     """
@@ -111,6 +166,17 @@ def two_list(vals, counts):
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
     "*** YOUR CODE HERE ***"
+    i = 0
+    if counts == [0] * len(vals):
+        return Link.empty
+    while i < len(vals) :
+        if counts[i] != 0:
+            value = vals[i]
+            counts[i] = counts[i] - 1
+            break
+        i += 1  
+    return Link(value, two_list(vals, counts))
+        
 
 
 class Link:
